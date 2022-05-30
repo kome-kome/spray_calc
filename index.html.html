@@ -1,0 +1,93 @@
+<html>
+  <head>
+    <meta http-equiv="content-type" charset="UTF-8">
+    <link rel="stylesheet" href="https://pyscript.net/alpha/pyscript.css" />
+    <script defer src="https://pyscript.net/alpha/pyscript.js"></script>
+  </head>
+
+  <body>
+      <p>
+        <h1 style="font-size:2em;color:#f00;">散布計画　計算サイト</h1>
+　　　　<br>
+        計算したい項目は空白、他の4か所を数字入力してください。
+      </p>
+      <p>
+        <br>散布量(L/10a)　⇒
+        <input id="input1" class="border">
+      </p>
+      <p>
+       <br> 散布幅(m) ⇒
+        <input id="input2" class="border">
+      </p>
+      <p>
+        <br>散布速度(km/h)　⇒
+        <input id="input3" class="border">
+      </p>
+      <p>
+        <br>ノズル総流量(L/min)　標準圧力での総流量を入力　⇒
+        <input id="input4" class="border">
+      </p>
+      <p>
+        <br>圃場係数(ｽﾘｯﾌﾟ無しの理論値の場合1、ｽﾘｯﾌﾟが多くなる悪条件だと0.9とか0.8とか入力)　⇒
+        <input id="input5" class="border">
+      </p>
+      <p>
+      <br>
+      <button id="btn" pys-onClick="ss_calc" style="backcround-color:#00ffff;border:2px solid #555">計算実行！</button> 
+      </p>
+      <py-script>
+  def calc_Setting_of_nozzle(Liter_per_10a,Width_of_spray,Speed,Setting_of_nozzle,Field_coefficient):
+      return "標準圧力（1.5MPa）でのノズル総流量で\n"+str(round(Speed*Width_of_spray*Liter_per_10a*Field_coefficient/60,1))+"L/minに設定すると良いです"
+  def calc_Liter_per_10a(Liter_per_10a,Width_of_spray,Speed,Setting_of_nozzle,Field_coefficient):
+      return "反当散布量は\n"+str(round((60*Setting_of_nozzle)/(Speed*Width_of_spray*Field_coefficient),1))+"L/10a になります"
+  def calc_Width_of_spray(Liter_per_10a,Width_of_spray,Speed,Setting_of_nozzle,Field_coefficient):
+      return "散布幅は\n"+str(round((60*Setting_of_nozzle)/(Speed*Liter_per_10a*Field_coefficient),1))+"m となります"
+  def calc_Speed(Liter_per_10a,Width_of_spray,Speed,Setting_of_nozzle,Field_coefficient):
+      return "散布速度は\n"+str(round((60*Setting_of_nozzle)/(Width_of_spray*Liter_per_10a*Field_coefficient),1))+"km/h で走行することになります"
+  def calc_Field_coefficient(Liter_per_10a,Width_of_spray,Speed,Setting_of_nozzle,Field_coefficient):
+      return "圃場係数は\n"+str(round((60*Setting_of_nozzle)/(Width_of_spray*Liter_per_10a*Speed),1))+"です"
+
+  def scal(a,b,c,d,e):
+          if a=='' and b!='' and c!='' and d!='' and e!='':
+              ans=calc_Liter_per_10a(None,float(b),float(c),float(d),float(e))
+              return ans
+          elif a!='' and b!='' and c!='' and d=='' and e!='':
+              ans=calc_Setting_of_nozzle(float(a),float(b),float(c),None,float(e))
+              return ans
+          elif a!='' and b=='' and c!='' and d!='' and e!='':
+              ans=calc_Width_of_spray(float(a),None,float(c),float(d),float(e))
+              return ans
+          elif a!='' and b!='' and c=='' and d!='' and e!='':
+              ans=calc_Speed(float(a),float(b),None,float(d),float(e))
+              return ans
+          elif a!='' and b!='' and c!='' and d!='' and e=='':
+              ans=calc_Field_coefficient(float(a),float(b),float(c),float(d),None)
+              return ans
+          else:
+              return "入力規則に従ってください"
+  def ss_calc(*ags,**kws):
+      input1_element=Element("input1")
+      input2_element=Element("input2")
+      input3_element=Element("input3")
+      input4_element=Element("input4")
+      input5_element=Element("input5")
+      input_word1=input1_element.element.value
+      input_word2=input2_element.element.value
+      input_word3=input3_element.element.value
+      input_word4=input4_element.element.value
+      input_word5=input5_element.element.value
+      outcome=scal(input_word1,input_word2,input_word3,input_word4,input_word5)
+      pyscript.write("fuga","結果: " + outcome)
+      """
+      #計算毎に入力バーを消去したい場合
+      input1_element.clear()
+      input2_element.clear()
+      input3_element.clear()
+      input4_element.clear()
+      input5_element.clear()
+      """
+      </py-script>
+      <br>
+      <label id="fuga"></label>
+  </body>
+</html>
