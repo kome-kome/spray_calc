@@ -54,19 +54,19 @@ form dl dd {
         let result_value="";
         if (a=="" && b!="" && c!="" && d!="" && e!="") {
             let bb=parseFloat(b),cc=parseFloat(c),dd=parseFloat(d),ee=parseFloat(e);
-            result_value="反当散布量は "+String(Math.round((60*dd)/(cc*bb*ee)*10)/10)+"L/min になります";
+            result_value="反当散布量は "+((60*dd)/(cc*bb*ee)).toFixed(1)+"L/min になります";
         }else if (a!="" && b=="" && c!="" && d!="" && e!="") {
             let aa=parseFloat(a),cc=parseFloat(c),dd=parseFloat(d),ee=parseFloat(e);
-            result_value="散布幅は "+String(Math.round((60*dd)/(cc*aa*ee)*10)/10)+"m となります";
+            result_value="散布幅は "+((60*dd)/(cc*aa*ee)).toFixed(1)+"m となります";
         }else if (a!="" && b!="" && c=="" && d!="" && e!="") {
             let aa=parseFloat(a),bb=parseFloat(b),dd=parseFloat(d),ee=parseFloat(e);
-            result_value="走行速度は "+String(Math.round((60*dd)/(bb*aa*ee)*10)/10)+"km/h で走行することになります";
+            result_value="走行速度は "+((60*dd)/(bb*aa*ee)).toFixed(1)+"km/h で走行することになります";
         }else if (a!="" && b!="" && c!="" && d=="" && e!="") {
             let aa=parseFloat(a),bb=parseFloat(b),cc=parseFloat(c),ee=parseFloat(e);
-            result_value="標準圧力でのﾉｽﾞﾙ総吐出量で "+String(Math.round((cc*bb*aa*ee)/6)/10)+"L/min に設定すると良いです";
+            result_value="標準圧力でのﾉｽﾞﾙ総吐出量で "+((cc*bb*aa*ee)/60).toFixed(1)+"L/min に設定すると良いです";
         }else if (a!="" && b!="" && c!="" && d!="" && e=="") {
             let aa=parseFloat(a),bb=parseFloat(b),cc=parseFloat(c),dd=parseFloat(d);
-            result_value="圃場係数は "+String(Math.round((60*dd)/(bb*aa*cc)*10)/10)+" です";
+            result_value="圃場係数は "+((60*dd)/(bb*aa*cc)).toFixed(1)+" です";
         }else{
             result_value="計算したい項目は空白、他の4か所を数字で入力してください";
         }
