@@ -1,16 +1,41 @@
 <style>
-.diet_form {
+.page_title {
+    font-size: 1.5em;
+    font-weight: bold;
+    padding-top: .5em;
+    padding-bottom: .5em;
+    padding-left: .5em;
+    margin-bottom: 2em;
+    background-color: #ebf4f6;
+    border-left: 5px solid #318496;
+    border-bottom: 2px solid #cccccc;
+    color: #318496;
+    text-align:center;
+    margin-right:auto;
+    margin-left:auto;
+}
+.calc_form {
     background: #eaf4ff;
     padding: 10px 30px;
+    text-align:center;
+    margin-right:auto;
+    margin-left:auto;
 }
-form dl dt {
+.table_form {
+    text-align:center;
+    margin-right:auto;
+    margin-left:auto;
+}
+form table th {
     width: 200px;
     height: 40px;
     padding: 10px 0;
     line-height: 40px;
-    float: left;
+    text-align: right;
+    margin-right:auto;
+    margin-left:auto;
 }
-form dl dd {
+form table tr {
     padding: 10px 0;
     margin: 0;
 }
@@ -30,24 +55,37 @@ form dl dd {
     cursor: pointer;
 }
 </style>
-<form class="diet_form">
-    <dt>計算したい項目は空白、他の4か所を数字入力してください。</dt>
-    <dl>
-        <dt>反当散布量(L/10a)：</dt>
-        <dd><input type="number" class="box" name="L_10a"></dd>
-        <dt>散布幅(m)：</dt>
-        <dd><input type="number" class="box" name="Width"></dd>
-        <dt>走行速度(km/h)：</dt>
-        <dd><input type="number" class="box" name="Speed"></dd>
-        <dt>ノズル総吐出量(L/min)：</dt>
-        <dd><input type="number" class="box" name="L_min"></dd>
-        <dt>圃場係数(通常1.0)：</dt>
-        <dd><input type="number" class="box" name="F_coef"></dd>
-        <p><input type="button" class="calc-btn" onclick="calc(L_10a.value, Width.value, Speed.value, L_min.value, F_coef.value);" value="計算"></p>
-
-    </dl>
-    <dt type=text id="result">結果:  </dt>
+<p class="page_title">散布計画　計算</p>
+<form class="calc_form">
+    <p>計算したい項目は空白、他の4か所を数字入力してください。</p>
+    <table class="table_form">
+        <tr>        
+            <th>反当散布量(L/10a)：</th>
+            <th><input type="number" class="box" name="L_10a"></th>
+        </tr>
+        <tr>
+            <th>散布幅(m)：</th>
+            <th><input type="number" class="box" name="Width"></th>
+        </tr>
+        <tr>
+            <th>走行速度(km/h)：</th>
+            <th><input type="number" class="box" name="Speed"></th>
+        </tr>
+        <tr>
+            <th>ノズル総吐出量(L/min)：</th>
+            <th><input type="number" class="box" name="L_min"></th>
+        </tr>
+        <tr>
+            <th>圃場係数(通常1.0)：</th>
+            <th><input type="number" class="box" name="F_coef"></th>
+        </tr>
+        <tr>
+            <th><input type="button" class="calc-btn" onclick="calc(L_10a.value, Width.value, Speed.value, L_min.value, F_coef.value);" value="計算"></th>
+        </tr>
+    </table>
+    <p type=text id="result">結果:  </p>
 </form>
+<a href="https://www.yamabiko-corp.co.jp/kioritz"><img src="https://www.yamabiko-corp.co.jp/files/user/corporate/img/business/agri/business02_02.jpg?v=1439951035"></a>
 <script>
     function calc(a, b, c, d, e) {
         document.getElementById('result').innerText="結果:  "
