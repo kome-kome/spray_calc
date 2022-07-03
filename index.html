@@ -1,6 +1,6 @@
 <style>
 .page_title {
-    font-size: 1.5em;
+    font-size: 2em;
     font-weight: bold;
     padding-top: .5em;
     padding-bottom: .5em;
@@ -14,7 +14,14 @@
     margin-right:auto;
     margin-left:auto;
 }
+.resulr_form{
+    font-size: 2em;
+    text-align:center;
+    margin-right:auto;
+    margin-left:auto;
+}
 .calc_form {
+    font-size: 1em;
     background: #eaf4ff;
     padding: 10px 30px;
     text-align:center;
@@ -22,11 +29,13 @@
     margin-left:auto;
 }
 .table_form {
+    font-size: 1em;
     text-align:center;
     margin-right:auto;
     margin-left:auto;
 }
 form table th {
+    font-size: 1em;
     width: 200px;
     height: 40px;
     padding: 10px 0;
@@ -36,6 +45,7 @@ form table th {
     margin-left:auto;
 }
 form table tr {
+    font-size: 1em;
     padding: 10px 0;
     margin: 0;
 }
@@ -83,9 +93,10 @@ form table tr {
             <th><input type="button" class="calc-btn" onclick="calc(L_10a.value, Width.value, Speed.value, L_min.value, F_coef.value);" value="計算"></th>
         </tr>
     </table>
-    <p type=text id="result">結果:  </p>
+    <p type=text id="result" class="resulr_form">結果:  </p>
+    <a href="https://www.yamabiko-corp.co.jp/kioritz"><img src="https://www.yamabiko-corp.co.jp/files/user/corporate/img/business/agri/business02_02.jpg?v=1439951035" width="100%"></a>
 </form>
-<a href="https://www.yamabiko-corp.co.jp/kioritz"><img src="https://www.yamabiko-corp.co.jp/files/user/corporate/img/business/agri/business02_02.jpg?v=1439951035" width="100%"></a>
+
 <script>
     function calc(a, b, c, d, e) {
         document.getElementById('result').innerText="結果:  "
