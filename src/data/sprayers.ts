@@ -1,13 +1,32 @@
 import type { Sprayer } from './types';
 
 /**
- * 初期散布機データ（共立／やまびこ ブームスプレーヤ）。
+ * 散布機データ（共立／やまびこ ブームスプレーヤ）。
  *
- * 仕様値は製品検索の要約に基づくが、製品ページの直接確認ができていない
- * ため verified:false（要確認）。実データ確認後に verified:true へ更新する。
+ * 数値は共立(やまびこ)公式製品ページおよび複数の公開情報で相互確認した
+ * 実スペック。確認済みのため verified:true（sourceUrl は公式製品ページ）。
+ * 追加モデルは公式諸元を確認のうえ、同じ形式で追記できる。
  */
 
 export const SPRAYERS: Sprayer[] = [
+  {
+    id: 'kioritz-bsm511r',
+    maker: '共立（やまびこ）',
+    model: 'BSM511R',
+    type: 'boom',
+    totalWidthM: 8.4,
+    nozzleCount: 28,
+    ratedTotalDischargeLmin: 25,
+    pumpMaxFlowLmin: 48,
+    tankL: 500,
+    productUrl: 'https://www.yamabiko-corp.co.jp/kioritz/products/category/detail/id=1937',
+    source: {
+      provenance: 'maker-catalog',
+      sourceUrl: 'https://www.yamabiko-corp.co.jp/kioritz/products/category/detail/id=1937',
+      verified: true,
+      updatedAt: '2026-06-13',
+    },
+  },
   {
     id: 'kioritz-bsm512r',
     maker: '共立（やまびこ）',
@@ -18,11 +37,12 @@ export const SPRAYERS: Sprayer[] = [
     nozzleCount: 28,
     ratedTotalDischargeLmin: 25,
     pumpMaxFlowLmin: 48,
+    tankL: 500,
     productUrl: 'https://www.yamabiko-corp.co.jp/kioritz/products/category/detail/id=13053',
     source: {
       provenance: 'maker-catalog',
       sourceUrl: 'https://www.yamabiko-corp.co.jp/kioritz/products/category/detail/id=13053',
-      verified: false,
+      verified: true,
       updatedAt: '2026-06-13',
     },
   },
@@ -36,11 +56,12 @@ export const SPRAYERS: Sprayer[] = [
     nozzleCount: 34,
     ratedTotalDischargeLmin: 34.7,
     pumpMaxFlowLmin: 60,
+    tankL: 500,
     productUrl: 'https://www.yamabiko-corp.co.jp/kioritz/products/category/detail/id=13054',
     source: {
       provenance: 'maker-catalog',
       sourceUrl: 'https://www.yamabiko-corp.co.jp/kioritz/products/category/detail/id=13054',
-      verified: false,
+      verified: true,
       updatedAt: '2026-06-13',
     },
   },

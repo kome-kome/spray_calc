@@ -5,6 +5,8 @@ interface MakerLink {
 
 const NOZZLE_MAKERS: MakerLink[] = [
   { label: 'ヤマホ工業（噴口・ノズル）', url: 'https://www.yamaho-k.co.jp/' },
+  { label: 'ヤマホ 反当散布量換算表', url: 'http://www.yamaho-k.co.jp/03/post_95.html' },
+  { label: 'ヤマホ 技術資料', url: 'https://www.yamaho-k.co.jp/03/' },
 ];
 
 const MACHINE_MAKERS: MakerLink[] = [

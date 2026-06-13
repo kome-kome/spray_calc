@@ -9,8 +9,9 @@ import type { Nozzle } from './types';
  *       → 0.3MPa では √(0.3/0.276) 倍 ≒ 0.79 L/min
  * 流量は規格定義からの算出値のため verified:true（出典 ISO 10625）。
  *
- * メーカ個別ノズルは公式流量表が未確認のため estimated / verified:false。
- * 実データが入手でき次第、ここを差し替えれば全機能の精度が上がる。
+ * メーカ個別ノズルは公式製品ページで吐出量を確認できたものを verified:true
+ * で収録する。未確認のものは estimated / verified:false とし、実データが
+ * 入手でき次第ここを差し替えれば全機能の精度が上がる。
  */
 
 const ISO_SOURCE = {
@@ -58,18 +59,20 @@ const isoNozzles: Nozzle[] = ISO_110.map((s) => ({
 
 const makerNozzles: Nozzle[] = [
   {
-    id: 'yamaho-saving-y',
+    id: 'yamaho-multi-jizai',
     maker: 'ヤマホ工業',
-    series: 'セービングノズル',
-    model: 'Y型（畑用少量散布）',
-    type: 'flat-fan',
-    ratedFlowLmin: 0.8, // 推定値・要確認
+    series: 'マルチ自在噴口',
+    model: 'マルチ自在噴口（孔径φ1.2）',
+    type: 'other',
+    // 公式値: 0.3MPa で 1.2〜1.5 L/min（適正圧 0.2〜0.4MPa）。自在ノズルのため
+    // 可変だが、代表値 1.3 を採用。出典はヤマホ公式製品ページ。
+    ratedFlowLmin: 1.3,
     ratedPressureMPa: 0.3,
-    productUrl: 'https://www.yamaho-k.co.jp/01b/06_1/post_139.html',
+    productUrl: 'https://www.yamaho-k.co.jp/m/m01/m08/post_57.php',
     source: {
-      provenance: 'estimated',
-      sourceUrl: 'https://www.yamaho-k.co.jp/01b/06_1/post_139.html',
-      verified: false,
+      provenance: 'maker-catalog',
+      sourceUrl: 'https://www.yamaho-k.co.jp/m/m01/m08/post_57.php',
+      verified: true,
       updatedAt: '2026-06-13',
     },
   },
