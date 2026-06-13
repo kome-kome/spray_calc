@@ -32,7 +32,8 @@ npm run preview  # ビルド結果のプレビュー
 （`provenance` / `verified` / `sourceUrl` / `updatedAt`）を持ちます。
 
 - `iso-standard` … ISO 10625 規格に基づく値（平板扇形ノズルの色分け・流量）
-- `maker-catalog` … メーカ公式の製品情報（共立／やまびこ ブームスプレーヤ等）
+- `maker-catalog` … メーカ公式の製品情報。確認済みの実データ（共立 BSM511R/512R/
+  513B/E、ヤマホ マルチ自在噴口）を `verified:true` で収録
 - `estimated` … 未確認の推定値
 
 まず公開情報で初期化し、後からメーカ公式の実データに差し替えれば、UI のバッジ
