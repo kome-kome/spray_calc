@@ -1,133 +1,27 @@
-<!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-RMT499DCGZ"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta
+      name="description"
+      content="ブームスプレーヤ／スピードスプレーヤの散布計画を計算。反当散布量・散布幅・走行速度・ノズル総吐出量・圃場係数から不明な1項目を逆算し、ノズル設定や機器の提案も行います。"
+    />
+    <title>散布計画 計算 | スプレーヤ散布量シミュレータ</title>
 
-  gtag('config', 'G-RMT499DCGZ');
-</script>
-<style>
-.page_title {
-    font-size: 2em;
-    font-weight: bold;
-    padding-top: .5em;
-    padding-bottom: .5em;
-    padding-left: .5em;
-    margin-bottom: 2em;
-    background-color: #ebf4f6;
-    border-left: 5px solid #318496;
-    border-bottom: 2px solid #cccccc;
-    color: #318496;
-    text-align:center;
-    margin-right:auto;
-    margin-left:auto;
-}
-.resulr_form{
-    font-size: 2em;
-    text-align:center;
-    margin-right:auto;
-    margin-left:auto;
-}
-.calc_form {
-    font-size: 1em;
-    background: #eaf4ff;
-    padding: 10px 30px;
-    text-align:center;
-    margin-right:auto;
-    margin-left:auto;
-}
-.table_form {
-    font-size: 1em;
-    text-align:center;
-    margin-right:auto;
-    margin-left:auto;
-}
-form table th {
-    font-size: 1em;
-    width: 200px;
-    height: 40px;
-    padding: 10px 0;
-    line-height: 40px;
-    text-align: right;
-    margin-right:auto;
-    margin-left:auto;
-}
-form table tr {
-    font-size: 1em;
-    padding: 10px 0;
-    margin: 0;
-}
-.box {
-    box-sizing: border-box;
-    width: 150px !important;
-    height: 40px !important;
-    margin: 0 !important;
-    padding: 0 10px !important;
-}
-.calc-btn {
-    width: 80px;
-    height: 30px;
-    border: 1px solid #333;
-}
-.calc-btn:hover {
-    cursor: pointer;
-}
-</style>
-<p class="page_title">散布計画　計算</p>
-<form class="calc_form">
-    <p>計算したい項目は空白、他の4か所を数字入力してください。</p>
-    <table class="table_form">
-        <tr>        
-            <th>反当散布量(L/10a)：</th>
-            <th><input type="number" class="box" name="L_10a"></th>
-        </tr>
-        <tr>
-            <th>散布幅(m)：</th>
-            <th><input type="number" class="box" name="Width"></th>
-        </tr>
-        <tr>
-            <th>走行速度(km/h)：</th>
-            <th><input type="number" class="box" name="Speed"></th>
-        </tr>
-        <tr>
-            <th>ノズル総吐出量(L/min)：</th>
-            <th><input type="number" class="box" name="L_min"></th>
-        </tr>
-        <tr>
-            <th>圃場係数(通常1.0)：</th>
-            <th><input type="number" class="box" name="F_coef"></th>
-        </tr>
-        <tr>
-            <th><input type="button" class="calc-btn" onclick="calc(L_10a.value, Width.value, Speed.value, L_min.value, F_coef.value);" value="計算"></th>
-        </tr>
-    </table>
-    <p type=text id="result" class="resulr_form">結果:  </p>
-    <a href="https://www.yamabiko-corp.co.jp/kioritz"><img src="https://www.yamabiko-corp.co.jp/files/user/corporate/img/business/agri/ss.png?v=1629884801" width="100%"></a>
-</form>
-
-<script>
-    function calc(a, b, c, d, e) {
-        document.getElementById('result').innerText="結果:  "
-        let result_value="";
-        if (a=="" && b!="" && c!="" && d!="" && e!="") {
-            let bb=parseFloat(b),cc=parseFloat(c),dd=parseFloat(d),ee=parseFloat(e);
-            result_value="反当散布量は "+((60*dd)/(cc*bb*ee)).toFixed(1)+"L/min になります";
-        }else if (a!="" && b=="" && c!="" && d!="" && e!="") {
-            let aa=parseFloat(a),cc=parseFloat(c),dd=parseFloat(d),ee=parseFloat(e);
-            result_value="散布幅は "+((60*dd)/(cc*aa*ee)).toFixed(1)+"m となります";
-        }else if (a!="" && b!="" && c=="" && d!="" && e!="") {
-            let aa=parseFloat(a),bb=parseFloat(b),dd=parseFloat(d),ee=parseFloat(e);
-            result_value="走行速度は "+((60*dd)/(bb*aa*ee)).toFixed(1)+"km/h で走行することになります";
-        }else if (a!="" && b!="" && c!="" && d=="" && e!="") {
-            let aa=parseFloat(a),bb=parseFloat(b),cc=parseFloat(c),ee=parseFloat(e);
-            result_value="標準圧力でのﾉｽﾞﾙ総吐出量で "+((cc*bb*aa*ee)/60).toFixed(1)+"L/min に設定すると良いです";
-        }else if (a!="" && b!="" && c!="" && d!="" && e=="") {
-            let aa=parseFloat(a),bb=parseFloat(b),cc=parseFloat(c),dd=parseFloat(d);
-            result_value="圃場係数は "+((60*dd)/(bb*aa*cc)).toFixed(1)+" です";
-        }else{
-            result_value="計算したい項目は空白、他の4か所を数字で入力してください";
-        }
-        document.getElementById('result').innerText+=result_value;
-    }
-</script>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-RMT499DCGZ"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag('js', new Date());
+      gtag('config', 'G-RMT499DCGZ');
+    </script>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>
