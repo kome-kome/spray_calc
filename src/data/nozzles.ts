@@ -4,21 +4,17 @@ import type { Nozzle } from './types';
  * 初期ノズルデータ。
  *
  * ISO110 平板扇形ノズルは ISO 10625 の色分けと、サイズ記号（40psi 時の
- * 米ガロン/min）から 0.3MPa(≒3bar) 換算した代表流量を収録している。
- *   例) "02" = 0.2 US gpm @ 40psi = 0.757 L/min @ 0.276MPa
- *       → 0.3MPa では √(0.3/0.276) 倍 ≒ 0.79 L/min
- * 流量は規格定義からの算出値のため verified:true（出典 ISO 10625）。
- *
- * メーカ個別ノズルは公式製品ページで吐出量を確認できたものを verified:true
- * で収録する。未確認のものは estimated / verified:false とし、実データが
- * 入手でき次第ここを差し替えれば全機能の精度が上がる。
+ * 米ガロン/min）から 0.3MPa(≒3bar) 換算した代表流量を収録（規格由来のため
+ * verified:true）。ノズルは「やまびこ純正＋ISO標準」を主体とし、他社(ヤマホ)
+ * はデータからは外して技術参考リンクのみ残す方針。やまびこ純正ノズルの流量表は
+ * 一次情報を確認でき次第ここに追記する。
  */
 
 const ISO_SOURCE = {
   provenance: 'iso-standard' as const,
   sourceUrl: 'https://www.iso.org/standard/37186.html',
   verified: true,
-  updatedAt: '2026-06-13',
+  updatedAt: '2026-06-14',
 };
 
 interface IsoSpec {
@@ -57,25 +53,4 @@ const isoNozzles: Nozzle[] = ISO_110.map((s) => ({
   source: ISO_SOURCE,
 }));
 
-const makerNozzles: Nozzle[] = [
-  {
-    id: 'yamaho-multi-jizai',
-    maker: 'ヤマホ工業',
-    series: 'マルチ自在噴口',
-    model: 'マルチ自在噴口（孔径φ1.2）',
-    type: 'other',
-    // 公式値: 0.3MPa で 1.2〜1.5 L/min（適正圧 0.2〜0.4MPa）。自在ノズルのため
-    // 可変だが、代表値 1.3 を採用。出典はヤマホ公式製品ページ。
-    ratedFlowLmin: 1.3,
-    ratedPressureMPa: 0.3,
-    productUrl: 'https://www.yamaho-k.co.jp/m/m01/m08/post_57.php',
-    source: {
-      provenance: 'maker-catalog',
-      sourceUrl: 'https://www.yamaho-k.co.jp/m/m01/m08/post_57.php',
-      verified: true,
-      updatedAt: '2026-06-13',
-    },
-  },
-];
-
-export const NOZZLES: Nozzle[] = [...isoNozzles, ...makerNozzles];
+export const NOZZLES: Nozzle[] = [...isoNozzles];
