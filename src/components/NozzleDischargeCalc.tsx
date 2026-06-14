@@ -137,7 +137,7 @@ export function NozzleDischargeCalc({ onApplyQ }: Props) {
         </button>
       </div>
 
-      <MakerLinks kind="nozzle" />
+      <MakerLinks />
     </section>
   );
 }
