@@ -1,12 +1,12 @@
 import { describe, it, expect } from 'vitest';
-import { usableDischargeLmin, isPumpCapacityBased, methodsForCrop, PUMP_USABLE_RATIO } from './selection';
+import { usableDischargeLmin, isPumpCapacityBased, PUMP_USABLE_RATIO } from './selection';
 import type { Machine } from '../data/types';
 
 const base = {
   id: 'x',
   maker: 'm',
   model: 'M',
-  applicableCropIds: [],
+  applicableCropCategories: [],
   sprayMethodIds: [],
   compatibleNozzleTypes: [],
   source: { provenance: 'estimated' as const, verified: false, updatedAt: '2026-01-01' },
@@ -27,12 +27,5 @@ describe('usableDischargeLmin', () => {
   it('returns null when no capacity is known', () => {
     const m: Machine = { ...base, category: 'riding' };
     expect(usableDischargeLmin(m)).toBeNull();
-  });
-});
-
-describe('methodsForCrop', () => {
-  it('returns methods applicable to the crop', () => {
-    expect(methodsForCrop('fruit').some((m) => m.id === 'orchard-airblast')).toBe(true);
-    expect(methodsForCrop('rice').some((m) => m.id === 'boom-broadcast')).toBe(true);
   });
 });

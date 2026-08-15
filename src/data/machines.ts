@@ -1,4 +1,4 @@
-import type { DataSource, Machine } from './types';
+import type { CropCategory, DataSource, Machine } from './types';
 
 /**
  * やまびこ(共立)散布機データ。
@@ -19,8 +19,11 @@ const src = (sourceUrl: string, verified: boolean): DataSource => ({
   updatedAt: '2026-06-14',
 });
 
-const BOOM_CROPS = ['rice', 'wheat', 'soybean', 'vegetable'];
+const BOOM_CATEGORIES: CropCategory[] = ['paddy', 'upland', 'vegetable'];
 const BOOM_METHODS = ['boom-broadcast', 'low-volume'];
+/** 動噴（ラジコン・セット）は手散布主体で、果樹から施設野菜まで広く使う。 */
+const POWER_CATEGORIES: CropCategory[] = ['paddy', 'upland', 'vegetable', 'facility', 'orchard', 'tea'];
+const POWER_METHODS = ['hose-lance', 'facility-spray', 'low-volume'];
 const CAT = 'https://www.yamabiko-corp.co.jp/kioritz/products/category';
 
 export const MACHINES: Machine[] = [
@@ -35,7 +38,7 @@ export const MACHINES: Machine[] = [
     ratedTotalDischargeLmin: 25,
     pumpCapacityLmin: 48,
     tankL: 500,
-    applicableCropIds: BOOM_CROPS,
+    applicableCropCategories: BOOM_CATEGORIES,
     sprayMethodIds: BOOM_METHODS,
     compatibleNozzleTypes: ['flat-fan'],
     productUrl: `${CAT}/detail/id=1937`,
@@ -52,7 +55,7 @@ export const MACHINES: Machine[] = [
     ratedTotalDischargeLmin: 25,
     pumpCapacityLmin: 48,
     tankL: 500,
-    applicableCropIds: BOOM_CROPS,
+    applicableCropCategories: BOOM_CATEGORIES,
     sprayMethodIds: BOOM_METHODS,
     compatibleNozzleTypes: ['flat-fan'],
     productUrl: `${CAT}/detail/id=13053`,
@@ -69,7 +72,7 @@ export const MACHINES: Machine[] = [
     ratedTotalDischargeLmin: 34.7,
     pumpCapacityLmin: 60,
     tankL: 500,
-    applicableCropIds: BOOM_CROPS,
+    applicableCropCategories: BOOM_CATEGORIES,
     sprayMethodIds: BOOM_METHODS,
     compatibleNozzleTypes: ['flat-fan'],
     productUrl: `${CAT}/detail/id=13054`,
@@ -85,7 +88,7 @@ export const MACHINES: Machine[] = [
     nozzleCount: 16,
     pumpCapacityLmin: 60,
     tankL: 500,
-    applicableCropIds: ['fruit'],
+    applicableCropCategories: ['orchard', 'tea'],
     sprayMethodIds: ['orchard-airblast'],
     compatibleNozzleTypes: ['hollow-cone', 'full-cone'],
     productUrl: `${CAT}/contents_type=59`,
@@ -99,7 +102,7 @@ export const MACHINES: Machine[] = [
     nozzleCount: 16,
     pumpCapacityLmin: 88,
     tankL: 600,
-    applicableCropIds: ['fruit'],
+    applicableCropCategories: ['orchard', 'tea'],
     sprayMethodIds: ['orchard-airblast'],
     compatibleNozzleTypes: ['hollow-cone', 'full-cone'],
     productUrl: `${CAT}/detail/id=13879`,
@@ -112,7 +115,7 @@ export const MACHINES: Machine[] = [
     category: 'speed',
     nozzleCount: 32,
     tankL: 1000,
-    applicableCropIds: ['fruit'],
+    applicableCropCategories: ['orchard', 'tea'],
     sprayMethodIds: ['orchard-airblast'],
     compatibleNozzleTypes: ['hollow-cone', 'full-cone'],
     productUrl: `${CAT}/contents_type=59`,
@@ -127,8 +130,8 @@ export const MACHINES: Machine[] = [
     category: 'power-rc',
     pumpCapacityLmin: 32,
     maxPressureMPa: 5.0,
-    applicableCropIds: ['fruit', 'vegetable', 'rice'],
-    sprayMethodIds: ['hose-lance', 'low-volume'],
+    applicableCropCategories: POWER_CATEGORIES,
+    sprayMethodIds: POWER_METHODS,
     compatibleNozzleTypes: ['full-cone', 'other'],
     productUrl: 'https://www.yamabiko-corp.co.jp/kioritz/special/id=11024',
     source: src('https://www.yamabiko-corp.co.jp/kioritz/special/id=11024', true),
@@ -140,8 +143,8 @@ export const MACHINES: Machine[] = [
     category: 'power-rc',
     pumpCapacityLmin: 30,
     maxPressureMPa: 5.0,
-    applicableCropIds: ['fruit', 'vegetable', 'rice'],
-    sprayMethodIds: ['hose-lance', 'low-volume'],
+    applicableCropCategories: POWER_CATEGORIES,
+    sprayMethodIds: POWER_METHODS,
     compatibleNozzleTypes: ['full-cone', 'other'],
     productUrl: `${CAT}/contents_type=109`,
     source: src(`${CAT}/contents_type=109`, false),
@@ -153,8 +156,8 @@ export const MACHINES: Machine[] = [
     category: 'power-rc',
     pumpCapacityLmin: 30,
     maxPressureMPa: 5.0,
-    applicableCropIds: ['fruit', 'vegetable', 'rice'],
-    sprayMethodIds: ['hose-lance', 'low-volume'],
+    applicableCropCategories: POWER_CATEGORIES,
+    sprayMethodIds: POWER_METHODS,
     compatibleNozzleTypes: ['full-cone', 'other'],
     productUrl: `${CAT}/detail/id=12767`,
     source: src(`${CAT}/detail/id=12767`, true),
@@ -168,8 +171,9 @@ export const MACHINES: Machine[] = [
     category: 'power-set',
     pumpCapacityLmin: 43,
     maxPressureMPa: 5.0,
-    applicableCropIds: ['fruit', 'vegetable'],
-    sprayMethodIds: ['hose-lance'],
+    // 定置式のセット動噴。圃場を移動しない使い方が主体で、水田・畑作は対象外。
+    applicableCropCategories: ['vegetable', 'facility', 'orchard', 'tea'],
+    sprayMethodIds: ['hose-lance', 'facility-spray'],
     compatibleNozzleTypes: ['full-cone', 'other'],
     productUrl: `${CAT}/contents_type=109`,
     source: src(`${CAT}/contents_type=109`, false),

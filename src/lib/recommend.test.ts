@@ -5,7 +5,7 @@ import type { Machine, Nozzle } from '../data/types';
 const src = { provenance: 'estimated' as const, verified: false, updatedAt: '2026-01-01' };
 const baseM = {
   maker: 'm',
-  applicableCropIds: [],
+  applicableCropCategories: [],
   sprayMethodIds: [],
   compatibleNozzleTypes: [],
   source: src,
