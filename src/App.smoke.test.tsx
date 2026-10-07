@@ -23,4 +23,19 @@ describe('App smoke', () => {
     // 圃場係数 F は初期値 1.0、Q は空欄のまま → Q を逆算して 50 L/min。
     expect(screen.getByText(/ノズル総吐出量は\s*50\s*L\/min/)).toBeTruthy();
   });
+
+  it('fills crop-specific defaults and warns on an out-of-range volume', () => {
+    render(<App />);
+    fireEvent.click(screen.getByRole('tab', { name: '機器・ノズル提案' }));
+
+    fireEvent.change(screen.getByLabelText('作物'), { target: { value: 'apple' } });
+    // りんご・休眠期・送風散布 → 散布量 400 L/10a、散布幅は樹列間隔 4m、速度 2km/h。
+    expect((screen.getByLabelText(/反当散布量/) as HTMLInputElement).value).toBe('400');
+    expect((screen.getByLabelText(/散布幅/) as HTMLInputElement).value).toBe('4');
+    expect((screen.getByLabelText(/走行速度/) as HTMLInputElement).value).toBe('2');
+
+    // ブーム散布の感覚で 25 L/10a を入れると、場面の目安から外れていることを警告する。
+    fireEvent.change(screen.getByLabelText(/反当散布量/), { target: { value: '25' } });
+    expect(screen.getByText(/通常 300〜600 L\/10a/)).toBeTruthy();
+  });
 });

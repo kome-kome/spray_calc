@@ -20,6 +20,31 @@ export interface DataSource {
 
 export type NozzleType = 'flat-fan' | 'hollow-cone' | 'full-cone' | 'other';
 
+/**
+ * 作物カテゴリ。散布の作業形態（機械・散布量水準）がほぼ同じ品目をまとめた区分で、
+ * 機種の適用範囲・散布方法の対象はこの粒度で持つ（品目を増やしても機種側の
+ * 修正が要らないようにするため）。
+ */
+export type CropCategory = 'paddy' | 'upland' | 'vegetable' | 'facility' | 'orchard' | 'tea';
+
+export const CROP_CATEGORY_LABELS: Record<CropCategory, string> = {
+  paddy: '水稲',
+  upland: '畑作',
+  vegetable: '露地野菜',
+  facility: '施設野菜',
+  orchard: '果樹',
+  tea: '茶',
+};
+
+export const CROP_CATEGORY_ORDER: CropCategory[] = [
+  'paddy',
+  'upland',
+  'vegetable',
+  'facility',
+  'orchard',
+  'tea',
+];
+
 export interface Nozzle {
   id: string;
   maker: string;
@@ -61,8 +86,8 @@ export interface Machine {
   pumpCapacityLmin?: number;
   maxPressureMPa?: number;
   tankL?: number;
-  /** 適用作物（crops の id）。 */
-  applicableCropIds: string[];
+  /** 適用作物カテゴリ（品目単位ではなくカテゴリ単位で保持）。 */
+  applicableCropCategories: CropCategory[];
   /** 散布方法（sprayMethods の id）。 */
   sprayMethodIds: string[];
   compatibleNozzleTypes: NozzleType[];

@@ -423,3 +423,39 @@ a {
 a:hover {
   text-decoration: underline;
 }
+
+/* --- 提案タブ: 場面の補足と入力の注意 --- */
+.plan-note {
+  margin: 6px 0 0;
+  padding: 8px 10px;
+  background: var(--teal-light);
+  border-radius: 8px;
+  font-size: 0.85rem;
+  color: var(--teal-dark);
+}
+.notice-list {
+  list-style: none;
+  margin: 10px 0 0;
+  padding: 0;
+  display: grid;
+  gap: 6px;
+}
+.notice {
+  padding: 8px 10px;
+  border-radius: 8px;
+  font-size: 0.85rem;
+  border: 1px solid transparent;
+}
+.notice--warn {
+  background: var(--warn-bg);
+  border-color: #f2d38a;
+  color: var(--warn);
+}
+.notice--info {
+  background: var(--teal-light);
+  border-color: var(--border);
+  color: var(--teal-dark);
+}
+.rec-item__advice {
+  color: var(--warn);
+}

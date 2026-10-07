@@ -1,5 +1,4 @@
 import type { Machine } from '../data/types';
-import { SPRAY_METHODS, type SprayMethod } from '../data/sprayMethods';
 
 /** 吸水量に対する実用吐出量の係数（吸水量＝上限、実用はその約8割）。 */
 export const PUMP_USABLE_RATIO = 0.8;
@@ -26,12 +25,4 @@ export function isPumpCapacityBased(m: Machine): boolean {
   return !hasRated && m.pumpCapacityLmin != null && m.pumpCapacityLmin > 0;
 }
 
-/** 指定作物で一般的な散布方法。 */
-export function methodsForCrop(cropId: string): SprayMethod[] {
-  return SPRAY_METHODS.filter((m) => m.cropIds.includes(cropId));
-}
-
-/** 指定作物に適用できる機種。 */
-export function machinesForCrop(cropId: string, machines: Machine[]): Machine[] {
-  return machines.filter((m) => m.applicableCropIds.includes(cropId));
-}
+// 作物・散布方法にひもづく絞り込みは lib/cropPlan.ts（machinesForPlan / methodsForCropId）。
